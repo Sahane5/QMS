@@ -23,7 +23,7 @@ const Navbar = () => {
     <header>
       <div className="container">
         <Link to="/">
-          <h1>Queue Management System</h1>
+          <h1>Queuing Management System </h1>
         </Link>
         <nav>
           {currentUser && (

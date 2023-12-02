@@ -1,0 +1,17 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./qms-app  # adjust the path to your actual frontend location
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+
+  backend:
+    build:
+      context: ./qms-api  # adjust the path to your actual backend location
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - frontend

@@ -22,7 +22,7 @@ FROM nginx:latest
 # Copy the built files from the builder stage to the NGINX server
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy NGINX configuration file
+# Copy the generated NGINX configuration file
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80

@@ -1,5 +1,6 @@
 version: '3'
 services:
+<<<<<<< HEAD
   frontend:
     build:
       context: ./qms-app  # adjust the path to your actual frontend location
@@ -15,3 +16,18 @@ services:
       - "3000:3000"
     depends_on:
       - frontend
+=======
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - mynetwork
+    hostname: my-react-app
+
+networks:
+  mynetwork:
+    driver: bridge
+>>>>>>> 78efdbede2d88e5124364fffd00b207b66cad6f4

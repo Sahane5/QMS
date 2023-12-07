@@ -5,7 +5,7 @@ const today = new Date();
 today.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0 for the beginning of the day
 
 const currentQueue = async (user_id) => {
-    return await Queue.findOne({ isActive: true, createdAt: { $gte: today }, user_id }).sort({ token: 1 }).limit(1);
+    return await Queue.findOne({ isActive: true, createdAt: { $gte: today } }).sort({ token: 1 }).limit(1);
 }
 
 // get all queues
@@ -23,7 +23,7 @@ const getQueues = async (req, res) => {
 
 // get current queue
 const getQueue = async (req, res) => {
-    const user_id = req.user._id
+    const user_id = req.user?._id
 
     const currentActiveQueue = await currentQueue(user_id);
 

@@ -13,7 +13,6 @@ interface Props {
 
 const QueueForm = ({ callback }: Props) => {
   const [formData, setFormData] = useState<queueFormData>(new queueFormData());
-
   const [currentUser, setCurrentUser] = useState<userVM | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -24,6 +23,30 @@ const QueueForm = ({ callback }: Props) => {
       setCurrentUser(JSON.parse(user));
     }
   }, []);
+
+  const printInformation = (token: string) => {
+    const printContent = `
+      <html>
+        <head>
+          <title>Generated Information</title>
+          <style>
+            /* Add any additional styles here */
+          </style>
+        </head>
+        <body>
+          <p>${token}</p>
+          <p>Full Name: ${formData.name}</p>
+          <p>Contact: ${formData.phone}</p>
+          <p>${new Date().toUTCString()}</p>
+        </body>
+      </html>
+    `;
+
+    const printWindow = window.open("", "_blank");
+    printWindow?.document.write(printContent);
+    printWindow?.document.close();
+    printWindow?.print();
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -44,9 +67,20 @@ const QueueForm = ({ callback }: Props) => {
       },
       body: JSON.stringify({ ...formData }),
     });
+
     const json = await response.json();
 
-    if (!response.ok) setError(json?.error);
+    if (!response.ok) {
+      setError(json?.error);
+      setIsLoading(false);
+      return;
+    }
+
+    // Extract the generated token from the response
+    const generatedToken = json?.token;
+
+    // Print only the specific information (token, name, phone, and date/time)
+    printInformation(generatedToken);
 
     callback();
     setIsLoading(false);
@@ -76,6 +110,8 @@ const QueueForm = ({ callback }: Props) => {
       <button onClick={handleSubmit} disabled={isLoading}>
         {isLoading ? "Processing ..." : "Add To Queue"}
       </button>
+
+      <button onClick={() => printInformation("Token No. X")}>Print</button>
 
       {error && <div className="error">{error}</div>}
     </div>

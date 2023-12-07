@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 app.post('/auth/', login)
 
 // require auth for all bellow routes: middleware
-app.use(requireAuth)
+
 
 app.use('/api/users', userRoutes)
 app.use('/api/queues', queueRoutes)

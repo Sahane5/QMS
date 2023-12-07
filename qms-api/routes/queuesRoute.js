@@ -12,16 +12,16 @@ const router = express.Router()
 
 
 // GET all queues
-router.get('/', getQueues)
+router.get('/',requireAuth, getQueues)
 
 // GET current queue
 router.get('/current', getQueue)
 
 // PUT next queue
-router.get('/next', nextQueue)
+router.get('/next',requireAuth, nextQueue)
 
 // POST a new queue
-router.post('/', createQueue)
+router.post('/',requireAuth, createQueue)
 
 
 // // DELETE a queue

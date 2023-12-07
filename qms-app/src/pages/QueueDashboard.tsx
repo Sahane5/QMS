@@ -9,21 +9,21 @@ const QueueDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       const user = localStorage.getItem("user");
-      if (user) {
-        const currentUser = JSON.parse(user) as userVM;
+      // if (user) {
+        // const currentUser = JSON.parse(user) as userVM;
 
         (async () => {
-          if (user) {
+          // if (user) {
             const response = await fetch(`${BaseURL}/api/queues/current`, {
-              headers: { Authorization: `Bearer ${currentUser.token}` },
+              // headers: { Authorization: `Bearer ${currentUser.token}` },
             });
             const json = await response.json();
             if (response.ok) {
               setCurrentToken(json);
             }
-          }
+          // }
         })();
-      }
+      // }
     };
 
     fetchData();

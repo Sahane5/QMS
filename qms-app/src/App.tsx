@@ -21,7 +21,7 @@ function App() {
             />
             <Route
               path="/queue"
-              element={user ? <QueueDashboard /> : <Navigate to="/login" />}
+              element={<QueueDashboard />}
             />
             <Route
               path="/login"
